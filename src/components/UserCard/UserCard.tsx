@@ -1,27 +1,7 @@
 import classes from "./UserCard.module.scss";
+import { UserProps } from "./UserCard.types";
 
-interface User {
-  name: { first: string; last: string };
-  login: { username: string };
-  gender: string;
-  email: string;
-  phone: string;
-  location: {
-    street: { number: number; name: string };
-    city: string;
-    state: string;
-    country: string;
-    postcode: number;
-  };
-  picture: { large: string };
-  nat: string;
-}
-
-interface Props {
-  user: User;
-}
-
-const UserCard: React.FC<Props> = ({ user }) => {
+const UserCard: React.FC<UserProps> = ({ user }) => {
   return (
     <div className={classes["user-card"]}>
       <div className={classes["user-card__image"]}>
