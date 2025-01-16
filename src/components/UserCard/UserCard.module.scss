@@ -1,0 +1,76 @@
+$primary-color: rgb(40, 168, 237);
+$background-color: rgb(72, 69, 69);
+$border-color: #ccc;
+$font-size-small: 14px;
+$border-radius: 10px;
+$gap-size: 15px;
+$padding-size: 10px;
+$margin-bottom-size: 10px;
+
+@mixin user-card {
+  display: grid;
+  gap: $gap-size;
+  border: 1px solid $border-color;
+  padding: $padding-size;
+  margin-bottom: $margin-bottom-size;
+  border-radius: $border-radius;
+  background-color: $background-color;
+}
+
+@mixin user-card-image {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin user-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-size;
+  font-size: $font-size-small;
+}
+
+.user-card {
+  @include user-card;
+}
+
+.user-card__image {
+  @include user-card-image;
+}
+
+.user-card__image img:nth-child(1) {
+  border-radius: 50%;
+  width: 130px;
+}
+
+.user-card__image img:nth-child(2) {
+  width: 50px;
+}
+
+.user-card__info h3 {
+  color: $primary-color;
+}
+
+.user-card__info p {
+  font-size: $font-size-small;
+}
+
+.user-card__details {
+  @include user-card-details;
+}
+
+.user-card__details__contact p:nth-child(2) {
+  color: $primary-color;
+}
+
+@media (width > 768px) {
+  .user-card {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+  }
+
+  .user-card__image {
+    justify-content: flex-start;
+    gap: $gap-size;
+  }
+}
