@@ -1,52 +1,22 @@
+import { useRef, useState } from "react";
+
 import UserCard from "../../components/UserCard/UserCard";
-import { User } from "../../types/user.interface";
-import { getUsersList } from "../../services/userService";
+
+import useFetchUsers from "../../hooks/useFetchUsers";
+import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 
 import classes from "./Users.module.scss";
-import { useEffect, useRef, useState } from "react";
 
 function Users() {
-  const [users, setUsers] = useState<User[]>([]);
   const [page, setPage] = useState<number>(1);
-  const [loading, setLoading] = useState<boolean>(false);
+  const { users, loading } = useFetchUsers(page);
+  const sentinelRef = useRef<HTMLDivElement>(null);
 
-  const sentinelRef = useRef<HTMLDivElement | null>(null);
+  const fetchMoreUsers = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
 
-  useEffect(() => {
-    async function fetchUsers() {
-      setLoading(true);
-      try {
-        const response = await fetch(getUsersList(page));
-        const data = await response.json();
-        setUsers((users) => [...users, ...data.results]);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchUsers();
-  }, [page]);
-
-  useEffect(() => {
-    const sentinel = sentinelRef.current;
-    if (!sentinel) return;
-
-    const observer = new IntersectionObserver((entries) => {
-      const [entry] = entries;
-
-      if (entry.isIntersecting && !loading) {
-        setPage((prevPage) => prevPage + 1);
-      }
-    });
-
-    observer.observe(sentinel);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [loading]);
+  useInfiniteScroll(fetchMoreUsers, sentinelRef);
 
   return (
     <div className={`${classes["user-list"]} ${classes.container}`}>
