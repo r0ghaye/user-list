@@ -1,36 +1,20 @@
-import { useRef, useState } from "react";
-
-import UserCard from "../../components/UserCard/UserCard";
-
 import useFetchUsers from "../../hooks/useFetchUsers";
-import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 
 import classes from "./Users.module.scss";
+import UserList from "../../components/UserList/UserList";
 
-function Users() {
-  const [page, setPage] = useState<number>(1);
-  const { users, loading } = useFetchUsers(page);
-  const sentinelRef = useRef<HTMLDivElement>(null);
-
-  const fetchMoreUsers = () => {
-    setPage((prevPage) => prevPage + 1);
-  };
-
-  useInfiniteScroll(fetchMoreUsers, sentinelRef);
+const Users: React.FC = () => {
+  const { users, loading, loadMore } = useFetchUsers();
 
   return (
     <div className={`${classes["user-list"]} ${classes.container}`}>
       <h1>Users List</h1>
-
-      {users.map((user) => (
-        <UserCard key={user.login.uuid} user={user} />
-      ))}
-
-      <div ref={sentinelRef} style={{ height: 1 }} />
+      <UserList users={users} />
 
       {loading && <div>Loading...</div>}
+      {!loading && <button onClick={loadMore}>Load More</button>}
     </div>
   );
-}
+};
 
 export default Users;
