@@ -10,6 +10,8 @@ export default function useFetchUsers() {
   const [page, setPage] = useState<number>(1)
 
   useEffect(() => {
+    
+
     async function fetchUsers() {
       setLoading(true);
       
