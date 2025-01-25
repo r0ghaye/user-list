@@ -11,8 +11,17 @@ const Users: React.FC = () => {
       <h1>Users List</h1>
       <UserList users={users} />
 
-      {loading && <div>Loading...</div>}
-      {!loading && <button onClick={loadMore}>Load More</button>}
+      <div className={classes["user-list__loading"]}>
+        {loading && <div>Loading...</div>}
+        {!loading && (
+          <button
+            onClick={loadMore}
+            className={classes["user-list__loading__button"]}
+          >
+            Load More
+          </button>
+        )}
+      </div>
     </div>
   );
 };

@@ -21,12 +21,12 @@ $margin-bottom-size: 10px;
     justify-content: space-between;
     align-items: center;
 
-     img:nth-child(1) {
+    img:nth-child(1) {
       border-radius: 50%;
       width: 130px;
     }
 
-     img:nth-child(2) {
+    img:nth-child(2) {
       width: 50px;
     }
   }
@@ -47,6 +47,10 @@ $margin-bottom-size: 10px;
 
     &__contact p:nth-child(2) {
       color: $primary-color;
+    }
+
+    &__location {
+      height: 40px;
     }
   }
 }

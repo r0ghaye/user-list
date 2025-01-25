@@ -1,3 +1,18 @@
-.user-list h1 {
-  margin: 40px 0 20px;
+.user-list {
+  h1 {
+    margin: 40px 0 20px;
+  }
+
+  &__loading {
+    margin: 20px 8px;
+    &__button {
+      padding: 10px 20px;
+      color: blue;
+      border-radius: 5px;
+      cursor: pointer;
+      &:hover {
+        background-color: antiquewhite;
+      }
+    }
+  }
 }
