@@ -4,7 +4,6 @@ import { User } from "../../types/user.interface"; // Adjust the import path as 
 import UserCard from "../UserCard/UserCard";
 import { UsersProps } from "./UserList.types";
 
-// import classes from "./UserList.module.scss"
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 
